@@ -491,10 +491,11 @@ function initContactForm() {
         e.preventDefault();
 
         const formData = new FormData(form);
+        const rawPhone = formData.get("phone").replace(/\D/g, ""); // Remove all non-digits
         const data = {
             name: formData.get("name"),
             organization: formData.get("organization") || "",
-            phone: formData.get("phone")
+            phone: "+" + rawPhone // Format as +998XXXXXXXXX
         };
 
         // Validation
