@@ -513,8 +513,12 @@ function initContactForm() {
 
         // Submit button state
         const submitBtn = form.querySelector("button[type='submit']");
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = "Отправка...";
+        const btnText = submitBtn.querySelector(".btn-text");
+        const btnLoader = submitBtn.querySelector(".btn-loader");
+
+        // Show loader, hide text
+        btnText.classList.add("hidden");
+        btnLoader.classList.remove("hidden");
         submitBtn.disabled = true;
 
         try {
@@ -548,7 +552,9 @@ function initContactForm() {
             showFormMessage("Произошла ошибка. Пожалуйста, попробуйте еще раз.", "error");
             console.error("Form error:", error);
         } finally {
-            submitBtn.textContent = originalText;
+            // Hide loader, show text
+            btnLoader.classList.add("hidden");
+            btnText.classList.remove("hidden");
             submitBtn.disabled = false;
         }
     });
